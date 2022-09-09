@@ -1,0 +1,10 @@
+.marks,.attendance{
+    width:50%;
+    background-color:rgb(41, 41, 41);
+    color:white;
+}
+
+.marks:hover,.attendance:hover{
+    color:rgb(199, 196, 196);
+    cursor:pointer;
+}
