@@ -6,6 +6,7 @@ import {useState} from 'react';
 import * as yup from 'yup';
 import {Modal} from 'react-bootstrap';
 import {ShowBufferImg} from './ShowBuffer';
+import {API} from "./global.js";
 
 export function CreateTeacher(){
     let navigate = useNavigate();
@@ -31,7 +32,7 @@ export function CreateTeacher(){
     function checkSectionAvailability(e){
         setSubject(e.target.value);
         let sub = e.target.value;
-        fetch(`http://127.0.0.1:4700/checkSectionAvailability/${sub}`)
+        fetch(`${API}/checkSectionAvailability/${sub}`)
         .then(response => response.json())
         .then(data => {
             if(data.length > 0){
@@ -58,7 +59,7 @@ export function CreateTeacher(){
 
             values.subject=subject;
 
-            fetch("http://127.0.0.1:4700/createTeacher",{
+            fetch(`${API}/createTeacher`,{
                 method:"POST",
                 body:JSON.stringify(values),
                 headers:{"content-type":"application/json"},

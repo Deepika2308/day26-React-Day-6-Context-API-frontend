@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import {Modal} from 'react-bootstrap';
+import {API} from "./global.js";
 
 export function CreateMarks() {
   let navigate = useNavigate();
@@ -13,7 +14,7 @@ export function CreateMarks() {
 
   //fetch all students
   useEffect(() => {
-    fetch("http://127.0.0.1:4700/getAllStudents")
+    fetch(`${API}/getAllStudents`)
       .then((response) => response.json())
       .then((data) => {
         if (data.hasOwnProperty("error")) {
@@ -41,7 +42,7 @@ export function CreateMarks() {
         marks:values.marks
       }
       //to store marks in to student's record in db
-      fetch(`http://127.0.0.1:4700/storeMarks/${values.studentId}`,{
+      fetch(`${API}/storeMarks/${values.studentId}`,{
         method:"PUT",
         body:JSON.stringify(storeMarks),
         headers:{"content-type":"application/json"},

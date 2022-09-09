@@ -7,6 +7,7 @@ import {useState} from 'react';
 import * as yup from 'yup';
 import {Modal} from 'react-bootstrap';
 import {ShowBufferImg} from './ShowBuffer';
+import {API} from "./global.js";
 
 //create student form
 export function CreateStudent() {
@@ -28,7 +29,7 @@ export function CreateStudent() {
     initialValues:{id:"",name:"",classSection:"",attendance:""},
     validationSchema:formValidation,
     onSubmit:(values) =>{
-      fetch("http://127.0.0.1:4700/createStudent",{
+      fetch(`${API}/createStudent`,{
                 method:"POST",
                 body:JSON.stringify(values),
                 headers:{"content-type":"application/json"},

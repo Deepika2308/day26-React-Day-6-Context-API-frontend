@@ -1,5 +1,6 @@
 import {useState,useEffect} from 'react';
 import {useNavigate} from 'react-router';
+import {API} from "./global.js";
 
 export function TeacherDetails(){
     let navigate = useNavigate();
@@ -16,7 +17,7 @@ export function TeacherDetails(){
     let[selectedClassStudents,setSelectedClassStudents] = useState([]);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:4700/getAllTeachers")
+        fetch(`${API}/getAllTeachers`)
         .then(response => response.json())
         .then(data => {
             if(data.hasOwnProperty('error')){
@@ -36,7 +37,7 @@ export function TeacherDetails(){
         setSelectedTeacher(e.target.value);
         let teacher = e.target.value;
 
-        fetch(`http://127.0.0.1:4700/getClasses/${teacher}`)
+        fetch(`${API}/getClasses/${teacher}`)
         .then(response => response.json())
         .then(data => {
             if(data.hasOwnProperty('msg')){
@@ -53,7 +54,7 @@ export function TeacherDetails(){
         setSelectedClassSection(e.target.value);
         let selectedClass = e.target.value;
 
-        fetch(`http://127.0.0.1:4700/getClassStudents/${selectedClass}`)
+        fetch(`${API}/getClassStudents/${selectedClass}`)
         .then(response => response.json())
         .then(data => {
             if(data.hasOwnProperty('error')){

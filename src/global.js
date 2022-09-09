@@ -1,0 +1,1 @@
+export const API = "https://day26studentteachermanagement.herokuapp.com";

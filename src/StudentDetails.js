@@ -3,6 +3,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import './styles.css';
 import {useState,useEffect}  from 'react';
 import {useNavigate} from 'react-router';
+import {API} from "./global.js";
 
 //called when student option from dropdwon is clicked
 function StudentDetails(){
@@ -14,7 +15,7 @@ function StudentDetails(){
 
     //fetch all student records form db
     useEffect(() => {
-        fetch("http://127.0.0.1:4700/getAllStudents")
+        fetch(`${API}/getAllStudents`)
         .then(response => response.json())
         .then(data => {
             if(!data.hasOwnProperty('error'))
@@ -62,7 +63,7 @@ function handleChange(e){
     setSelectedStudent(e.target.value);
     let stud = e.target.value;
     if(stud !== "select"){
-        fetch(`http://127.0.0.1:4700/getStudentDetails/${stud}`)
+        fetch(`${API}/getStudentDetails/${stud}`)
     .then(response => response.json())
     .then(data => {
         let marks= data.msg;
@@ -136,7 +137,7 @@ function StudentAttendanceDetails({students}){
         let stud = e.target.value;
         // fetch a student record
         if(stud !== "select"){
-            fetch(`http://127.0.0.1:4700/getStudentDetails/${stud}`)
+            fetch(`${API}/getStudentDetails/${stud}`)
         .then(response => response.json())
         .then(data => {
         

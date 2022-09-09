@@ -2,6 +2,7 @@ import DatePicker from "react-multi-date-picker"
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useNavigate} from 'react-router-dom';
 import {useState,useEffect} from 'react';
+import {API} from "./global.js";
 
 const format="YYYY/MM/DD";
 
@@ -15,7 +16,7 @@ export function MarkAttendance(){
 
     //get all students id from db to load in the dropdown
     useEffect(() => {
-        fetch("http://127.0.0.1:4700/getAllStudents")
+        fetch(`${API}/getAllStudents`)
           .then((response) => response.json())
           .then((data) => {
             if (data.hasOwnProperty("error")) {
@@ -41,7 +42,7 @@ export function MarkAttendance(){
             absentDates:absentDates
         }
 
-        fetch(`http://127.0.0.1:4700/markAttendance/${selectedStudent}`,{
+        fetch(`${API}/markAttendance/${selectedStudent}`,{
             method:"PUT",
             body:JSON.stringify(obj),
             headers:{"content-type":"application/json"},
